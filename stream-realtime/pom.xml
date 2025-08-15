@@ -18,22 +18,17 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <repositories>
-        <repository>
-            <id>cloudera</id>
-            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-        </repository>
-    </repositories>
+    <!--     <repositories> -->
+    <!--         <repository> -->
+    <!--             <id>cloudera</id> -->
+    <!--             <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url> -->
+    <!--         </repository> -->
+    <!--     </repositories> -->
     <dependencies>
         <dependency>
             <groupId>org.example</groupId>
             <artifactId>stream-common</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
@@ -71,6 +66,10 @@
             <artifactId>flink-connector-hive_2.12</artifactId>
             <version>1.17.1</version>
         </dependency>
+        <!-- Maven依赖 -->
+        <!-- 例如Flink 1.17.0 -->
+
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -81,6 +80,18 @@
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>8.0.33</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <version>2.1.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j-slf4j-impl</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                </exclusion>
+            </exclusions>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hive</groupId>
@@ -139,6 +150,18 @@
             <groupId>com.ververica</groupId>
             <artifactId>flink-connector-mysql-cdc</artifactId>
         </dependency>
+        <!--         Flink CDC Pg connector -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-postgres-cdc</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <!--         Flink CDC SqlServer connector -->
+        <dependency>
+            <groupId>com.ververica</groupId>
+            <artifactId>flink-connector-sqlserver-cdc</artifactId>
+            <version>3.0.0</version>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -189,27 +212,6 @@
             <artifactId>flink-connector-jdbc</artifactId>
             <version>3.1.1-1.17</version>
         </dependency>
-
-
-        <!--  SQL Server JDBC 驱动  -->
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-            <version>9.4.1.jre8</version>
-        </dependency>
-        <!--  Flink SQL Server CDC 连接器（包含 SqlServerSource）  -->
-        <dependency>
-            <groupId>com.ververica</groupId>
-            <artifactId>flink-connector-sqlserver-cdc</artifactId>
-            <version>2.4.1</version>
-            <!--  版本需与 Flink 版本兼容，2.4.x 适配 Flink 1.15+  -->
-        </dependency>
-        <!--  若使用 Flink 1.17+，可能需要额外添加 debezium 依赖  -->
-        <dependency>
-            <groupId>io.debezium</groupId>
-            <artifactId>debezium-connector-sqlserver</artifactId>
-            <version>1.9.7.Final</version>
-        </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -240,9 +242,6 @@
             <version>1.0.1</version>
             <!--             <scope>test</scope> -->
         </dependency>
-
-
-
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-aws</artifactId>

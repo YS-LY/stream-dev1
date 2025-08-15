@@ -14,5 +14,9 @@
         <module name="stream-deploy" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="aaa" target="1.8" />
+      <module name="aaaa" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

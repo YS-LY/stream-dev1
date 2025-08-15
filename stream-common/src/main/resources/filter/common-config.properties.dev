@@ -32,3 +32,9 @@ zookeeper.server.host.list=cdh01:2181
 holo.endpoint=
 ali.key=
 ali.pwd=
+
+
+mysql.databases.conf=realtime_v1_config
+hbase.namespace=Default
+
+kafka.cdc.db.topic=ods_all_cdc
