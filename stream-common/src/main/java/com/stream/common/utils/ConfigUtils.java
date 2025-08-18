@@ -20,8 +20,8 @@ public final class ConfigUtils {
     private static Properties properties;
 
     static {
+        properties = new Properties();
         try {
-            properties = new Properties();
             properties.load(ConfigUtils.class.getClassLoader().getResourceAsStream("common-config.properties"));
         } catch (IOException e) {
             logger.error("加载配置文件出错, exit 1", e);
@@ -30,27 +30,57 @@ public final class ConfigUtils {
     }
 
     public static String getString(String key) {
-        // logger.info("加载配置[" + key + "]:" + value);
-        return properties.getProperty(key).trim();
+        String value = properties.getProperty(key);
+        if (value == null) {
+            logger.error("配置项未找到: {}", key);
+            throw new RuntimeException("配置项未找到: " + key);
+        }
+        return value.trim();
     }
 
     public static int getInt(String key) {
-        String value = properties.getProperty(key).trim();
-        return Integer.parseInt(value);
+        String value = getString(key);
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            logger.error("配置项格式错误: {} = {}", key, value);
+            throw new RuntimeException("配置项格式错误: " + key + " = " + value, e);
+        }
     }
 
     public static int getInt(String key, int defaultValue) {
-        String value = properties.getProperty(key).trim();
-        return Strings.isNullOrEmpty(value) ? defaultValue : Integer.parseInt(value);
+        String value = properties.getProperty(key);
+        if (Strings.isNullOrEmpty(value)) {
+            return defaultValue;
+        }
+        try {
+            return Integer.parseInt(value.trim());
+        } catch (NumberFormatException e) {
+            logger.error("配置项格式错误: {} = {}", key, value);
+            throw new RuntimeException("配置项格式错误: " + key + " = " + value, e);
+        }
     }
 
     public static long getLong(String key) {
-        String value = properties.getProperty(key).trim();
-        return Long.parseLong(value);
+        String value = getString(key);
+        try {
+            return Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            logger.error("配置项格式错误: {} = {}", key, value);
+            throw new RuntimeException("配置项格式错误: " + key + " = " + value, e);
+        }
     }
 
     public static long getLong(String key, long defaultValue) {
-        String value = properties.getProperty(key).trim();
-        return Strings.isNullOrEmpty(value) ? defaultValue : Long.parseLong(value);
+        String value = properties.getProperty(key);
+        if (Strings.isNullOrEmpty(value)) {
+            return defaultValue;
+        }
+        try {
+            return Long.parseLong(value.trim());
+        } catch (NumberFormatException e) {
+            logger.error("配置项格式错误: {} = {}", key, value);
+            throw new RuntimeException("配置项格式错误: " + key + " = " + value, e);
+        }
     }
 }

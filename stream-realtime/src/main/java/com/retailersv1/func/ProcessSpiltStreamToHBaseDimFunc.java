@@ -74,7 +74,7 @@ public class ProcessSpiltStreamToHBaseDimFunc extends BroadcastProcessFunction<J
                 if (!jsonObject.getString("op").equals("d")){
                     JSONObject after = jsonObject.getJSONObject("after");
                     String sinkTableName = configMap.get(tableName).getSinkTable();
-                    sinkTableName = "realtime_v2:"+sinkTableName;
+                    sinkTableName = "default:"+sinkTableName;
                     String hbaseRowKey = after.getString(configMap.get(tableName).getSinkRowKey());
                     Table hbaseConnectionTable = hbaseConnection.getTable(TableName.valueOf(sinkTableName));
                     Put put = new Put(Bytes.toBytes(MD5Hash.getMD5AsHex(hbaseRowKey.getBytes(StandardCharsets.UTF_8))));
@@ -90,10 +90,16 @@ public class ProcessSpiltStreamToHBaseDimFunc extends BroadcastProcessFunction<J
 
     @Override
     public void processBroadcastElement(JSONObject jsonObject, BroadcastProcessFunction<JSONObject, JSONObject, JSONObject>.Context context, Collector<JSONObject> collector) throws Exception {
-        // {"op":"r","after":{"sink_row_key":"id","sink_family":"info","sink_table":"dim_base_category2","source_table":"base_category2","sink_columns":"id,name,category1_id"}}
-//        System.err.println("processBroadcastElement jsonObject -> "+ jsonObject.toString());
+        // {"op":"r","after":{"sink_row_key":"id","sink_family":"info","sink_table":"dim_base_category2",
+        // "source_table":"base_category2","sink_columns":"id,name,category1_id"}}
+//  System.err.println("processBroadcastElement jsonObject -> "+ jsonObject.toString());
         BroadcastState<String, JSONObject> broadcastState = context.getBroadcastState(mapStateDescriptor);
-        // HeapBroadcastState{stateMetaInfo=RegisteredBroadcastBackendStateMetaInfo{name='mapStageDesc', keySerializer=org.apache.flink.api.common.typeutils.base.StringSerializer@39529185, valueSerializer=org.apache.flink.api.java.typeutils.runtime.kryo.KryoSerializer@59b0797e, assignmentMode=BROADCAST}, backingMap={}, internalMapCopySerializer=org.apache.flink.api.common.typeutils.base.MapSerializer@4ab01899}
+        // HeapBroadcastState{stateMetaInfo=RegisteredBroadcastBackendStateMetaInfo{name='mapStageDesc',
+        // keySerializer=org.apache.flink.api.common.typeutils.base.StringSerializer@39529185,
+        // valueSerializer=org.apache.flink.api.java.typeutils.runtime.kryo.KryoSerializer@59b0797e,
+        // assignmentMode=BROADCAST},
+        // backingMap={},
+        // internalMapCopySerializer=org.apache.flink.api.common.typeutils.base.MapSerializer@4ab01899}
         String op = jsonObject.getString("op");
         if (jsonObject.containsKey("after")){
             String sourceTableName = jsonObject.getJSONObject("after").getString("source_table");

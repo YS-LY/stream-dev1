@@ -8,7 +8,6 @@ mysql.timezone=Asia/Shanghai
 mysql.database=realtime_v1
 mysql.user=root
 mysql.pwd=root
-
 # Redis 本地配置
 redis.host=localhost
 redis.port=6379
@@ -24,17 +23,19 @@ kafka.start.log=start_log
 kafka.display.log=display_log
 kafka.action.log=action_log
 kafka.page.topic=ods_page_log
+kafka.dwd.cart.info=dwd_interaction_cart_add
+kafka.dwd.interaction.comment.topic=dwd_interaction_comment
 
 # Zookeeper 本地配置
-zookeeper.server.host.list=cdh01:2181
+zookeeper.server.host.list=cdh01:2181,cdh02:2181,cdh03:2181
 
 # 暂时不用的服务可留空或注释
 holo.endpoint=
 ali.key=
 ali.pwd=
 
-
+hbase.dim.base_dic=dim.base_dic
 mysql.databases.conf=realtime_v1_config
-hbase.namespace=Default
+hbase.namespace=default
 
 kafka.cdc.db.topic=ods_all_cdc
