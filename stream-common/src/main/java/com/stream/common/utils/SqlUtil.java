@@ -1,11 +1,6 @@
 package com.stream.common.utils;
 
-/**
- * @Package com.stream.common.utils
- * @Author xiaoye
- * @Date 2025/8/18 16:50
- * @description:
- */
+
 public class SqlUtil {
     private static final String HBASE_NAME_SPACE = ConfigUtils.getString("hbase.namespace");
     private static final String KAFKA_SERVER = ConfigUtils.getString("kafka.bootstrap.servers");
@@ -44,4 +39,6 @@ public class SqlUtil {
                 "  'value.format' = 'json'\n" +
                 ")";
     }
+
+
 }

@@ -13,6 +13,8 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
  * @Date 2025/8/18 18:37
  * @description: 完成加购事实表
  */
+
+//交易域加购事务事实表
 public class DbusDwdTradeCartAdd2Kafka {
     private static final String ODS_KAFKA_TOPIC = ConfigUtils.getString("kafka.cdc.db.topic");
     private static final String DWD_CART_INFO = ConfigUtils.getString("kafka.dwd.cart.info");

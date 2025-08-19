@@ -24,7 +24,9 @@ kafka.display.log=display_log
 kafka.action.log=action_log
 kafka.page.topic=ods_page_log
 kafka.dwd.cart.info=dwd_interaction_cart_add
-kafka.dwd.interaction.comment.topic=dwd_interaction_comment
+kafka.dwd.comment.info=dwd_interaction_comment
+kafka.dwd.order.detail=dwd_trade_order_detail
+kafka.dwd.trade.order.cancel.detail=dwd_trade_order_cancel_detail
 
 # Zookeeper 本地配置
 zookeeper.server.host.list=cdh01:2181,cdh02:2181,cdh03:2181
@@ -34,7 +36,7 @@ holo.endpoint=
 ali.key=
 ali.pwd=
 
-hbase.dim.base_dic=dim.base_dic
+
 mysql.databases.conf=realtime_v1_config
 hbase.namespace=default
 
