@@ -140,6 +140,6 @@ public class DwdTradeOrderDetail {
         tEnv.executeSql(createSinkSql);
 
         // 6. 写入Kafka
-        joinedTable.executeInsert("dwd_trade_order_detail");
+        //joinedTable.executeInsert("dwd_trade_order_detail");
     }
 }

@@ -116,7 +116,7 @@ public class DwdTradeRefundPaySucDetail {
                         "join base_dic for system_time as of rp.pt as dic " +  // Lookup关联字典表
                         "on rp.payment_type = dic.dic_code"
         );
-//         resultTable.execute().print();  // 生产环境建议注释调试打印
+         resultTable.execute().print();  // 生产环境建议注释调试打印
 
         // 6. 创建Kafka Sink表
         String createSinkSql = "CREATE TABLE dwd_trade_refund_pay_suc_detail (\n" +

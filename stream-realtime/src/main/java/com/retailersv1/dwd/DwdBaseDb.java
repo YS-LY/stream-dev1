@@ -30,12 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Package com.retailersv.dwd
- * @Author xiaoye
- * @Date 2025/8/19 19:31
- * @description:
- */
+
 public class DwdBaseDb {
     private static final String kafka_bootstrap_server = ConfigUtils.getString("kafka.bootstrap.servers");
     private static final String ODS_KAFKA_TOPIC = ConfigUtils.getString("kafka.cdc.db.topic");

@@ -11,6 +11,8 @@
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/stream-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/stream-core/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-deploy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-deploy/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stream-ml/src/main/java" charset="UTF-8" />

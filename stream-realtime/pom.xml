@@ -66,10 +66,6 @@
             <artifactId>flink-connector-hive_2.12</artifactId>
             <version>1.17.1</version>
         </dependency>
-        <!-- Maven依赖 -->
-        <!-- 例如Flink 1.17.0 -->
-
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>

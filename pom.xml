@@ -118,9 +118,6 @@
                 <version>${flink.version}</version>
                 <!--                 <scope>provided</scope> -->
             </dependency>
-
-
-
             <!--         Flink 解析JSON -->
             <dependency>
                 <groupId>org.apache.flink</groupId>
@@ -237,8 +234,8 @@
 <!--                <artifactId>flink-parquet</artifactId>-->
 <!--                <version>1.8.0</version>-->
 <!--            </dependency>-->
-            <!--  parquet 文件格式相关依赖 结束  -->
-            <!--  mysql 相关依赖 开始  -->
+<!--            &lt;!&ndash;  parquet 文件格式相关依赖 结束  &ndash;&gt;-->
+<!--            &lt;!&ndash;  mysql 相关依赖 开始  &ndash;&gt;-->
 <!--            <dependency>-->
 <!--                <groupId>commons-dbutils</groupId>-->
 <!--                <artifactId>commons-dbutils</artifactId>-->
@@ -317,7 +314,6 @@
             </resource>
         </resources>
     </build>
-
 
 
 </project>

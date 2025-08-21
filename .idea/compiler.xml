@@ -17,6 +17,13 @@
     <bytecodeTargetLevel>
       <module name="aaa" target="1.8" />
       <module name="aaaa" target="1.8" />
+      <module name="stream-core" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="stream-common" options="" />
+      <module name="stream-realtime" options="" />
+    </option>
   </component>
 </project>
