@@ -78,35 +78,58 @@ public class DwsTrafficSourceKeywordPageViewWindow {
                         "keyword,\n" +
                         "count(*) AS keyword_count \n" +
                         // 基于处理时间pt创建滚动窗口
-                        "FROM table(tumble(table keyword_table, descriptor(pt), interval '5' SECOND  )) \n" +
+                        "FROM table(tumble(table keyword_table, descriptor(pt), interval '1' SECOND  )) \n" +
                         "GROUP BY window_start, window_end, keyword"
         );
 //        resultTable.execute().print();  // 调试用
 
-        // 6. 创建Doris Sink表（结构不变）
+        // 4. 创建 MySQL Sink 表（核心新增代码）
+        String mysqlSinkSql = "CREATE TABLE mysql_keyword_sink (" +
+                "  stt STRING, " +
+                "  edt STRING, " +
+                "  cur_date STRING, " +
+                "  keyword STRING, " +
+                "  keyword_count BIGINT " +
+                ") WITH (" +
+                "  'connector' = 'jdbc'," +
+                "  'url' = 'jdbc:mysql://cdh01:3306/gmall2025?useSSL=false&serverTimezone=Asia/Shanghai'," +  // 替换为你的MySQL地址和库名
+                "  'username' = 'root'," +  // 如 root
+                "  'password' = '123456'," +   // 如 123456
+                "  'table-name' = 'dws_traffic_source_keyword_page_view_window'," +  // MySQL表名
+                "  'driver' = 'com.mysql.cj.jdbc.Driver'," +  // MySQL 8.0+ 驱动类
+                "  'sink.buffer-flush.max-rows' = '1'," +  // 测试用：1条数据就刷写
+                "  'sink.buffer-flush.interval' = '1000' " +
+        ")";
+        tEnv.executeSql(mysqlSinkSql);
 
+        // 5. 将 resultTable 写入 MySQL
+        resultTable.executeInsert("mysql_keyword_sink");
 
+//        // 6. 创建Doris Sink表（结构不变）
 
-        tEnv.executeSql("create table dws_traffic_source_keyword_page_view_window(" +
-                "  stt string, " +  // 2023-07-11 14:14:14
-                "  edt string, " +
-                "  cur_date string, " +
-                "  keyword string, " +
-                "  keyword_count bigint " +
-                ")with(" +
-                " 'connector' = 'doris'," +
-                " 'fenodes' = '" + DORIS_FE_NODES + "'," +
-                "  'table.identifier' = '" + DORIS_DATABASE + ".dws_traffic_source_keyword_page_view_window'," +
-                "  'username' = 'root'," +
-                "  'password' = '123456', " +
-                "  'sink.properties.format' = 'json', " +
-                "  'sink.buffer-count' = '4', " +
-                "  'sink.buffer-size' = '4086'," +
-                "  'sink.enable-2pc' = 'false', " + // 测试阶段可以关闭两阶段提交,方便测试
-                "  'sink.properties.read_json_by_line' = 'true' " +
-                ")");
+//        tEnv.executeSql("create table dws_traffic_source_keyword_page_view_window(" +
+//                "  stt string, " +  // 2023-07-11 14:14:14
+//                "  edt string, " +
+//                "  cur_date string, " +
+//                "  keyword string, " +
+//                "  keyword_count bigint " +
+//                ")with(" +
+//                " 'connector' = 'doris'," +
+//                " 'fenodes' = '" + DORIS_FE_NODES + "'," +
+//                "  'table.identifier' = '" + DORIS_DATABASE + ".dws_traffic_source_keyword_page_view_window'," +
+//                "  'username' = 'root'," +
+//                "  'password' = '123456', " +
+//                "  'sink.properties.format' = 'json', " +
+//                "  'sink.buffer-count' = '1', " +
+//                "  'sink.buffer-size' = '4086'," +
+//                "  'sink.enable-2pc' = 'false', " + // 测试阶段可以关闭两阶段提交,方便测试
+//                "  'sink.properties.read_json_by_line' = 'true' " +
+//                ")");
+//
+//        // 7. 将结果写入Doris
+//        resultTable.executeInsert("dws_traffic_source_keyword_page_view_window");
 
-        // 7. 将结果写入Doris
-        resultTable.executeInsert("dws_traffic_source_keyword_page_view_window");
+//        // 在最后添加，确保任务持续运行（流处理必备）
+//        env.execute("DwsTrafficSourceKeywordPageViewWindow");
     }
 }

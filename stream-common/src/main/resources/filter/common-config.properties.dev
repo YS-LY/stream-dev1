@@ -35,10 +35,14 @@ kafka.dwd.trade.order.refund=dwd_trade_order_refund
 kafka.dwd.trade.refund.pay.suc.detail=dwd_trade_refund_pay_suc_detail
 
 # Zookeeper 本地配置
-zookeeper.server.host.list=cdh01:2181,cdh01:2181,cdh03:2181
+zookeeper.server.host.list=cdh01:2181,cdh02:2181,cdh03:2181
 
 # Hbase
 hbase.namespace=default
+
+# Doris
+doris.fe.nodes=cdh01:8131,cdh02:8131,cdh03:8131
+doris.database=retailersv1_dws
 
 # Hive
 hive.conf.dir=D:/2211a/sx_yjx/stream-realtime/src/main/resources
