@@ -132,34 +132,6 @@ public class DwsTrafficVcChArIsNewPageViewWindow {
         // 9. 将结果写入MySQL
         resultTable.executeInsert("mysql_traffic_core_sink");
 
-//        // 8. 创建Doris Sink表
-//        String createSinkSql = "CREATE TABLE IF NOT EXISTS dws_traffic_vc_ch_ar_is_new_page_view_window (\n" +
-//                "stt DATETIME COMMENT '窗口起始时间（处理时间）',\n" +
-//                "edt DATETIME COMMENT '窗口结束时间（处理时间）',\n" +
-//                "cur_date DATE COMMENT '当天日期',\n" +
-//                "vc VARCHAR(256) COMMENT '版本号',\n" +
-//                "ch VARCHAR(256) COMMENT '渠道',\n" +
-//                "ar VARCHAR(256) COMMENT '地区',\n" +
-//                "is_new TINYINT COMMENT '新老访客状态标记',\n" +
-//                "uv_ct BIGINT REPLACE COMMENT '独立访客数',\n" +
-//                "sv_ct BIGINT REPLACE COMMENT '会话数',\n" +
-//                "pv_ct BIGINT REPLACE COMMENT '页面浏览数',\n" +
-//                "dur_sum BIGINT REPLACE COMMENT '累计访问时长'\n" +
-//                ")" + "WITH (\n" +
-//                " 'connector' = 'doris',\n" +
-//                " 'fenodes' = '" + Constant.DORIS_FE_NODES + "',\n" +
-//                " 'table.identifier' = '" + DWS_TRAFFIC_VC_CH_AR_IS_NEW_SINK_IDENTIFIER + "',\n" +
-//                " 'username' = 'root',\n" +
-//                " 'password' = '123456', \n" +
-//                " 'sink.properties.format' = 'json', \n" +
-//                " 'sink.buffer-count' = '1', \n" +
-//                " 'sink.buffer-size' = '4096',\n" +
-//                " 'sink.enable-2pc' = 'true', \n" +
-//                " 'sink.properties.read_json_by_line' = 'true' \n" +
-//                ")";
-//        tEnv.executeSql(createSinkSql);
-//
-//        // 9. 将结果写入Doris
-//        resultTable.executeInsert("dws_traffic_vc_ch_ar_is_new_page_view_window");
+
     }
 }

@@ -86,7 +86,7 @@ public class DbusDwsTrafficSourceKeywordPageView2Doris {
                 " 'connector' = 'doris'," +
                 " 'fenodes' = '" + DORIS_FE_NODES + "'," +
                 "  'table.identifier' = '" + DORIS_DATABASE + ".dws_traffic_source_keyword_page_view_window'," +
-                "  'username' = 'root'," +
+                "  'username' = 'admin'," +
                 "  'password' = '123456', " +
                 "  'sink.properties.format' = 'json', " +
                 "  'sink.buffer-count' = '4', " +

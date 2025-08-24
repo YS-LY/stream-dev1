@@ -42,7 +42,7 @@ hbase.namespace=default
 
 # Doris
 doris.fe.nodes=cdh01:8131,cdh02:8131,cdh03:8131
-doris.database=retailersv1_dws
+doris.database=gmall2025_realtime
 
 # Hive
 hive.conf.dir=D:/2211a/sx_yjx/stream-realtime/src/main/resources

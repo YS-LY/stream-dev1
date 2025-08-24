@@ -88,28 +88,5 @@ public class DwsTrafficHomeDetailPageViewWindow {
         // 6. 将结果写入MySQL
         resultTable.executeInsert("mysql_home_detail_sink");
 
-//        // 5. 创建Doris Sink表
-//        String createSinkSql = "CREATE TABLE IF NOT EXISTS dws_traffic_home_detail_page_view_window (\n" +
-//                "stt string  COMMENT '窗口起始时间（处理时间）',\n" +
-//                "edt string  COMMENT '窗口结束时间（处理时间）',\n" +
-//                "cur_date string COMMENT '当天日期',\n" +
-//                "home_uv_ct BIGINT COMMENT '首页独立访客数',\n" +
-//                "good_detail_uv_ct BIGINT COMMENT '商品详情页独立访客数'\n" +
-//                ")" + "WITH (\n" +
-//                " 'connector' = 'doris',\n" +
-//                " 'fenodes' = '" + Constant.DORIS_FE_NODES + "',\n" +
-//                " 'table.identifier' = '" + DWS_TRAFFIC_HOME_DETAIL_SINK_IDENTIFIER + "',\n" +
-//                " 'username' = 'root',\n" +
-//                " 'password' = '123456', \n" +
-//                " 'sink.properties.format' = 'json', \n" +
-//                " 'sink.buffer-count' = '1', \n" +
-//                " 'sink.buffer-size' = '4096',\n" +  // 修正缓冲区大小为标准值
-//                " 'sink.enable-2pc' = 'true', \n" +
-//                " 'sink.properties.read_json_by_line' = 'true' \n" +
-//                ")";
-//        tEnv.executeSql(createSinkSql);
-//
-//        // 6. 将结果写入Doris
-//        resultTable.executeInsert("dws_traffic_home_detail_page_view_window");
     }
 }

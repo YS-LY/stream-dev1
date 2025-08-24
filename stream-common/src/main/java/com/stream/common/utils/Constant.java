@@ -15,9 +15,10 @@ public final class Constant {
     public static final String TOPIC_DWD_TRADE_CART_ADD = "dwd_cart_info";
     public static final String TOPIC_DWD_TRADE_ORDER_DETAIL="dwd_trade_order_detail";
     public static final String TOPIC_DWD_TRADE_ORDER_PAYMENT_SUCCESS="dwd_trade_order_pay_suc_detail";
+
     public static final String KAFKA_BOOTSTRAP_SERVERS = "cdh01:9092,cdh02:9092"; // Kafka集群地址
 
     // Doris相关
-    public static final String DORIS_DATABASE = "retailersv1_dws"; // Doris数据库名
+    public static final String DORIS_DATABASE = "gmall2025_realtime"; // Doris数据库名
     public static final String DORIS_FE_NODES = "cdh01:8131"; // Doris FE节点
 }
