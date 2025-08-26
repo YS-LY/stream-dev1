@@ -9,7 +9,7 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
 /**
  * 流量域首页和商品详情页浏览窗口表（基于处理时间）
- * 功能：从Kafka读取页面浏览数据，统计各窗口内首页和详情页独立访客数，写入Doris
+ * 功能：从Kafka读取页面浏览数据，统计各窗口内首页和详情页独立访客数
  */
 public class DwsTrafficHomeDetailPageViewWindow {
     private static final String DWD_TRAFFIC_PAGE_TOPIC = Constant.TOPIC_DWD_TRAFFIC_PAGE;
