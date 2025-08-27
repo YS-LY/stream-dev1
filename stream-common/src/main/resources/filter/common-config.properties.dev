@@ -1,11 +1,11 @@
-env=dev
+#env=dev
 
 # MySQL 本地开发配置
 mysql.host=192.168.200.101
 mysql.port=3306
-mysql.url=jdbc:mysql://cdh01:3306/realtime_v1?useSSL=false&serverTimezone=Asia/Shanghai
+mysql.url=jdbc:mysql://cdh01:3306/FlinkGd03?useSSL=false&serverTimezone=Asia/Shanghai
 mysql.timezone=Asia/Shanghai
-mysql.database=realtime_v1
+mysql.database=FlinkGd03
 mysql.databases.conf=realtime_v1_config
 mysql.user=root
 mysql.pwd=123456
@@ -18,21 +18,15 @@ redis.pwd=
 
 # Kafka 本地或开发环境配置（若本地没启动，可填测试集群地址）
 Kafka.bootstrap.servers=cdh01:9092,cdh02:9092,cdh03:9092
-REALTIME.KAFKA.LOG.TOPIC=realtime_log
+REALTIME.KAFKA.LOG.TOPIC=flink_gd03_log
 kafka.dirty.topic=dirty_log
 kafka.err.log=err_log
 kafka.start.log=start_log
 kafka.display.log=display_log
 kafka.action.log=action_log
 kafka.page.topic=ods_page_log
-kafka.cdc.db.topic=ods_ecommerce_order
-kafka.dwd.comment.info=dwd_comment_info
-kafka.dwd.cart.info=dwd_cart_info
-kafka.dwd.trade.order.detail=dwd_trade_order_detail
-kafka.dwd.trade.order.cancel.detail=dwd_trade_order_cancel_detail
-kafka.dwd.trade.order.pay.suc.detail=dwd_trade_order_pay_suc_detail
-kafka.dwd.trade.order.refund=dwd_trade_order_refund
-kafka.dwd.trade.refund.pay.suc.detail=dwd_trade_refund_pay_suc_detail
+kafka.cdc.db.topic=ods_gd03_cdc
+
 
 # Zookeeper 本地配置
 zookeeper.server.host.list=cdh01:2181,cdh02:2181,cdh03:2181
@@ -46,3 +40,14 @@ doris.database=gmall2025_realtime
 
 # Hive
 hive.conf.dir=D:/2211a/sx_yjx/stream-realtime/src/main/resources
+
+# FlinkGd03  Flink 工单03项目
+# FlinkGd03 Ods
+FlinkGd03.ods.all.data.topic=FlinkGd03_ods_all_data
+kafka.ods.user.visit.log.topic=FlinkGd03_ods_user_visit_log
+kafka.ods.product.interaction.log.topic=FlinkGd03_ods_product_interaction_log
+kafka.ods.order.pay.log.topic=FlinkGd03_ods_order_pay_log
+kafka.ods.search.log.topic=FlinkGd03_ods_search_log
+kafka.ods.page.click.log.topic=FlinkGd03_ods_page_click_log
+kafka.ods.crowd.attribute.log.topic=FlinkGd03_ods_crowd_attribute_log
+kafka.dwd.user.visit.detail=FlinkGd03_dwd_user_visit_detail

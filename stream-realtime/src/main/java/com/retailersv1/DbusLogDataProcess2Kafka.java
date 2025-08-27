@@ -88,8 +88,8 @@ public class DbusLogDataProcess2Kafka {
           .name("convert_json_process");
 
         SideOutputDataStream<String> dirtyDS = processDS.getSideOutput(dirtyTag);
-//        processDS.print();
-//        dirtyDS.print("dirtyDS -> ");
+        processDS.print();
+        dirtyDS.print("dirtyDS -> ");
         dirtyDS.sinkTo(KafkaUtils.buildKafkaSink(kafka_botstrap_servers,kafka_dirty_topic))
                 .uid("sink_dirty_data_to_kafka")
                 .name("sink_dirty_data_to_kafka");

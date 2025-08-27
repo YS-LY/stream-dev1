@@ -1,12 +1,7 @@
 package com.stream.common.utils;
 
-import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.Lists;
-import com.stream.common.domain.HBaseInfo;
 import lombok.SneakyThrows;
-import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.filter.FirstKeyOnlyFilter;
@@ -16,11 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.Executors;
-
-import static org.apache.hadoop.hbase.CellUtil.cloneQualifier;
-import static org.apache.hadoop.hbase.CellUtil.cloneValue;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * @author han.zhou
@@ -31,6 +25,36 @@ import static org.apache.hadoop.hbase.CellUtil.cloneValue;
 public class HbaseUtils {
     private Connection connection;
     private static final Logger LOG = LoggerFactory.getLogger(HbaseUtils.class.getName());
+
+    public void initGd03DimTables() throws IOException {
+        String namespace = "FlinkGd03";
+
+        // 创建命名空间
+        createNamespace(namespace);
+
+        // 创建各个DIM表
+        createDimTable(namespace, "dim_product");
+        createDimTable(namespace, "dim_page");
+        createDimTable(namespace, "dim_traffic_source");
+        createDimTable(namespace, "dim_city");
+        createDimTable(namespace, "dim_taoqi_level");
+    }
+
+    /**
+     * 创建单个DIM表
+     */
+    private void createDimTable(String namespace, String tableName) {
+        try {
+            if (!tableIsExists(namespace + ":" + tableName)) {
+                createTable(namespace, tableName, "info");
+                LOG.info("成功创建DIM表: {}:{}", namespace, tableName);
+            } else {
+                LOG.info("DIM表已存在: {}:{}", namespace, tableName);
+            }
+        } catch (Exception e) {
+            LOG.error("创建DIM表失败: " + tableName, e);
+        }
+    }
 
     public HbaseUtils(String zookeeper_quorum) throws Exception {
         org.apache.hadoop.conf.Configuration entries = HBaseConfiguration.create();
@@ -209,13 +233,37 @@ public class HbaseUtils {
         }
     }
 
+    /**
+     * 创建HBase命名空间
+     * @param nameSpace 命名空间名称
+     * @throws IOException 操作异常
+     */
+    public void createNamespace(String nameSpace) throws IOException {
+        Admin admin = connection.getAdmin();
+        NamespaceDescriptor namespaceDescriptor = NamespaceDescriptor.create(nameSpace).build();
+        try {
+            admin.createNamespace(namespaceDescriptor);
+            LOG.info("命名空间 {} 创建成功", nameSpace);
+        } catch (NamespaceExistException e) {
+            LOG.warn("命名空间 {} 已存在", nameSpace);
+        } finally {
+            admin.close();
+        }
+    }
+
     @SneakyThrows
     public static void main(String[] args) {
         System.setProperty("HADOOP_USER_NAME","root");
         HbaseUtils hbaseUtils = new HbaseUtils("cdh01,cdh02,cdh03");
 //        hbaseUtils.dropHbaseNameSpace("GMALL_FLINK_2207");
 //        System.err.println(hbaseUtils.tableIsExists("realtime_v2:dim_user_info"));
-        hbaseUtils.deleteTable("ns_zxn:dim_base_category1");
+//        hbaseUtils.deleteTable("ns_zxn:dim_base_category1");
+        hbaseUtils.initGd03DimTables();
 //        hbaseUtils.getHbaseNameSpaceAllTablesList("realtime_v2");
+//        hbaseUtils.createNamespace("map_create_hbase_dim_0814");
+//        hbaseUtils.createTable("ns_zxn","aa_0818");
+//        hbaseUtils.tableIsExists("ns_zxn:aa_0818");
+//        hbaseUtils.getHbaseNameSpaceAllTablesList("ns_zxn");
+
     }
 }
