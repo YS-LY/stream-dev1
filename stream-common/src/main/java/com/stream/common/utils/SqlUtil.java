@@ -61,5 +61,28 @@ public class SqlUtil {
                 ")";
     }
 
+    static class SqlUtilAdaptor {
+        // Kafka源表配置（适配ODS层）
+        public static String getKafkaConfig(String topic, String groupId) {
+            return "'connector'='kafka'," +
+                    "'topic'='" + topic + "'," +
+                    "'properties.bootstrap.servers'='cdh01:9092,cdh02:9092,cdh03:9092'," +
+                    "'properties.group.id'='" + groupId + "'," +
+                    "'scan.startup.mode'='earliest-offset'," +  // 首次启动从最早偏移量
+                    "'format'='json'";  // 数据格式（与Kafka中日志格式一致）
+        }
+
+        // Upsert-Kafka配置（适配DWD层）
+        public static String getUpsertKafkaConfig(String topic) {
+            return "'connector'='upsert-kafka'," +
+                    "'topic'='" + topic + "'," +
+                    "'properties.bootstrap.servers'='cdh01:9092,cdh02:9092,cdh03:9092'," +
+                    "'key.format'='json'," +  // 主键格式（与表主键类型匹配）
+                    "'key.json.ignore-parse-errors'='true'," +  // 忽略主键解析错误
+                    "'value.format'='json'," +  // 值格式
+                    "'value.json.fail-on-missing-field'='false'";  // 字段缺失不报错（兼容数据变更）
+        }
+    }
+
 
 }

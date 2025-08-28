@@ -22,14 +22,7 @@ import org.apache.flink.util.OutputTag;
 
 import java.util.HashSet;
 import java.util.Set;
-/**
- * @BelongsProject: zxk_git
- * @BelongsPackage: com.flinkgd03.ods
- * @Author: zhuxiangkuan
- * @CreateTime: 2025-08-27  09:45
- * @Description: TODO MySQL CDC采集FlinkGd03数据库的ODS层数据，进行新老用户校验后发送到Kafka
- * @Version: 1.0
- */
+
 
 public class MysqlCdcToKafkaWithUserVerification {
 

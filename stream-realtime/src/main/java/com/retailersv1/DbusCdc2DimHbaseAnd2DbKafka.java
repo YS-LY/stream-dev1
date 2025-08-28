@@ -55,10 +55,10 @@
 //        DataStreamSource<String> cdcDbMainStream = env.fromSource(mySQLDbMainCdcSource, WatermarkStrategy.noWatermarks(), "mysql_cdc_main_source");
 //
 //        // 读取数据库的配置
-////        DataStreamSource<String> cdcDbDimStream = env.fromSource(mySQLCdcDimConfSource, WatermarkStrategy.noWatermarks(), "mysql_cdc_dim_source");
+//        DataStreamSource<String> cdcDbDimStream = env.fromSource(mySQLCdcDimConfSource, WatermarkStrategy.noWatermarks(), "mysql_cdc_dim_source");
 //
-////        cdcDbMainStream.print();
-////        cdcDbDimStream.print();
+//        cdcDbMainStream.print();
+//        cdcDbDimStream.print();
 //        //将 CDC 数据流中的 JSON 字符串转换为可操作的 JSONObject 对象
 //        SingleOutputStreamOperator<JSONObject> cdcDbMainStreamMap = cdcDbMainStream.map(JSONObject::parseObject)
 //                .uid("db_data_convert_json")
@@ -70,42 +70,42 @@
 //                .uid("mysql_cdc_to_kafka_topic")
 //                .name("_mysql_cdc_to_kafka_topic");
 //
-////        cdcDbMainStreamMap.print("cdcDbMainStreamMap ->");
+//        cdcDbMainStreamMap.print("cdcDbMainStreamMap ->");
 //
-////        SingleOutputStreamOperator<JSONObject> cdcDbDimStreamMap = cdcDbDimStream.map(JSONObject::parseObject)
-////                .uid("dim_data_convert_json")
-////                .name("_dim_data_convert_json")
-////                .setParallelism(1);
+//        SingleOutputStreamOperator<JSONObject> cdcDbDimStreamMap = cdcDbDimStream.map(JSONObject::parseObject)
+//                .uid("dim_data_convert_json")
+//                .name("_dim_data_convert_json")
+//                .setParallelism(1);
 //
-//        //对 CDC 维度表数据流进行了数据清洗和格式转换
-////        SingleOutputStreamOperator<JSONObject> cdcDbDimStreamMapCleanColumn = cdcDbDimStreamMap.map(s -> {
-////                    s.remove("source");
-////                    s.remove("transaction");
-////                    JSONObject resJson = new JSONObject();
-////                    if ("d".equals(s.getString("op"))) {
-////                        resJson.put("before", s.getJSONObject("before"));
-////                    } else {
-////                        resJson.put("after", s.getJSONObject("after"));
-////                    }
-////                    resJson.put("op", s.getString("op"));
-////                    return resJson;
-////                }).uid("clean_json_column_map")
-////                .name("_clean_json_column_map");
-////        cdcDbDimStreamMapCleanColumn.print();
+////        对 CDC 维度表数据流进行了数据清洗和格式转换
+//        SingleOutputStreamOperator<JSONObject> cdcDbDimStreamMapCleanColumn = cdcDbDimStreamMap.map(s -> {
+//                    s.remove("source");
+//                    s.remove("transaction");
+//                    JSONObject resJson = new JSONObject();
+//                    if ("d".equals(s.getString("op"))) {
+//                        resJson.put("before", s.getJSONObject("before"));
+//                    } else {
+//                        resJson.put("after", s.getJSONObject("after"));
+//                    }
+//                    resJson.put("op", s.getString("op"));
+//                    return resJson;
+//                }).uid("clean_json_column_map")
+//                .name("_clean_json_column_map");
+//        cdcDbDimStreamMapCleanColumn.print();
 //
-////        SingleOutputStreamOperator<JSONObject> tpDs = cdcDbDimStreamMapCleanColumn.map(
-////                new MapUpdateHbaseDimTableFunc(CDH_ZOOKEEPER_SERVER, CDH_HBASE_NAME_SPACE))
-////                .uid("map_create_hbase_dim_table")
-////                .name("map_create_hbase_dim_table");
+//        SingleOutputStreamOperator<JSONObject> tpDs = cdcDbDimStreamMapCleanColumn.map(
+//                new MapUpdateHbaseDimTableFunc(CDH_ZOOKEEPER_SERVER, CDH_HBASE_NAME_SPACE))
+//                .uid("map_create_hbase_dim_table")
+//                .name("map_create_hbase_dim_table");
 //
 //
 //        MapStateDescriptor<String, JSONObject> mapStageDesc = new MapStateDescriptor<>("mapStageDesc", String.class, JSONObject.class);
 //
-////        BroadcastStream<JSONObject> broadcastDs = tpDs.broadcast(mapStageDesc);
-////        BroadcastConnectedStream<JSONObject, JSONObject> connectDs = cdcDbMainStreamMap.connect(broadcastDs);
+//        BroadcastStream<JSONObject> broadcastDs = tpDs.broadcast(mapStageDesc);
+//        BroadcastConnectedStream<JSONObject, JSONObject> connectDs = cdcDbMainStreamMap.connect(broadcastDs);
 //
 //
-////        connectDs.process(new ProcessSpiltStreamToHBaseDimFunc(mapStageDesc));
+//        connectDs.process(new ProcessSpiltStreamToHBaseDimFunc(mapStageDesc));
 //
 //
 //        env.disableOperatorChaining();
