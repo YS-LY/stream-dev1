@@ -51,3 +51,4 @@ kafka.ods.search.log.topic=FlinkGd03_ods_search_log
 kafka.ods.page.click.log.topic=FlinkGd03_ods_page_click_log
 kafka.ods.crowd.attribute.log.topic=FlinkGd03_ods_crowd_attribute_log
 kafka.dwd.user.visit.detail=FlinkGd03_dwd_user_visit_detail
+FlinkGd03_dws_traffic_overview=FlinkGd03_dws_traffic_overview
